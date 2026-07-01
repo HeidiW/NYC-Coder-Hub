@@ -1,0 +1,11 @@
+{
+  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "cd ../.. && pnpm --filter @workspace/personal-site run build",
+  "outputDirectory": "dist/public",
+  "framework": null,
+  "build": {
+    "env": {
+      "BASE_PATH": "/"
+    }
+  }
+}
