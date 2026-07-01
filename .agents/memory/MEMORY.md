@@ -1,0 +1,1 @@
+- [Personal site design palette](personal-site-palette.md) — teal primary + amber accent; all palette changes go in index.css :root only.

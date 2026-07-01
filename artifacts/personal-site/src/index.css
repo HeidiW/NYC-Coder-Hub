@@ -55,93 +55,108 @@
   --font-mono: 'Space Mono', monospace;
   --font-serif: Georgia, serif;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
 }
 
 :root {
-  /* We force dark mode variables in root because it's a dark mode only site */
-  --background: 0 0% 4%;
-  --foreground: 145 100% 50%;
-  
-  --border: 145 100% 50% / 0.2;
-  --input: 145 100% 50% / 0.2;
-  --ring: 145 100% 50%;
+  /* Dark charcoal with a breath of warmth — not pure black */
+  --background: 222 14% 6%;
+  --foreground: 176 68% 46%;
 
-  --card: 0 0% 6%;
-  --card-foreground: 145 100% 50%;
-  --card-border: 145 100% 50% / 0.3;
+  --border: 176 68% 46% / 0.2;
+  --input: 176 68% 46% / 0.2;
+  --ring: 176 68% 46%;
 
-  --popover: 0 0% 6%;
-  --popover-foreground: 145 100% 50%;
-  --popover-border: 145 100% 50% / 0.3;
+  --card: 222 14% 8%;
+  --card-foreground: 176 68% 46%;
+  --card-border: 176 68% 46% / 0.25;
 
-  --primary: 145 100% 50%;
-  --primary-foreground: 0 0% 4%;
+  --popover: 222 14% 8%;
+  --popover-foreground: 176 68% 46%;
+  --popover-border: 176 68% 46% / 0.25;
 
-  --secondary: 0 0% 12%;
-  --secondary-foreground: 145 100% 50%;
+  /* Teal primary */
+  --primary: 176 68% 46%;
+  --primary-foreground: 222 14% 6%;
+  --primary-border: hsl(176 68% 38%);
 
-  --muted: 0 0% 12%;
-  --muted-foreground: 145 100% 50% / 0.6;
+  /* Warm dark secondary */
+  --secondary: 222 14% 12%;
+  --secondary-foreground: 176 68% 46%;
+  --secondary-border: hsl(222 14% 18%);
 
-  --accent: 145 100% 50% / 0.1;
-  --accent-foreground: 145 100% 50%;
+  --muted: 222 14% 11%;
+  --muted-foreground: 176 40% 55%;
+  --muted-border: hsl(222 14% 18%);
+
+  /* Warm amber — the midcentury accent */
+  --accent: 38 90% 57%;
+  --accent-foreground: 222 14% 6%;
+  --accent-border: hsl(38 90% 45%);
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
+  --destructive-border: hsl(0 84% 50%);
 
-  --sidebar: 0 0% 6%;
-  --sidebar-foreground: 145 100% 50%;
-  --sidebar-border: 145 100% 50% / 0.2;
-  --sidebar-primary: 145 100% 50%;
-  --sidebar-primary-foreground: 0 0% 4%;
-  --sidebar-accent: 0 0% 12%;
-  --sidebar-accent-foreground: 145 100% 50%;
-  --sidebar-ring: 145 100% 50%;
+  --sidebar: 222 14% 8%;
+  --sidebar-foreground: 176 68% 46%;
+  --sidebar-border: 176 68% 46% / 0.2;
+  --sidebar-primary: 176 68% 46%;
+  --sidebar-primary-foreground: 222 14% 6%;
+  --sidebar-primary-border: hsl(176 68% 38%);
+  --sidebar-accent: 222 14% 12%;
+  --sidebar-accent-foreground: 176 68% 46%;
+  --sidebar-accent-border: hsl(222 14% 18%);
+  --sidebar-ring: 176 68% 46%;
 
-  --radius: 0px; /* brutalist square edges */
+  /* Slight softening from pure brutalism — MCM preferred clean over harsh */
+  --radius: 3px;
 
-  --chart-1: 145 100% 50%;
-  --chart-2: 0 0% 80%;
-  --chart-3: 0 0% 60%;
-  --chart-4: 0 0% 40%;
-  --chart-5: 0 0% 20%;
+  --chart-1: 176 68% 46%;
+  --chart-2: 38 90% 57%;
+  --chart-3: 222 14% 65%;
+  --chart-4: 176 68% 30%;
+  --chart-5: 38 90% 40%;
 }
 
 .dark {
-  /* Site is already dark, just mirror the root variables */
-  --background: 0 0% 4%;
-  --foreground: 145 100% 50%;
-  
-  --border: 145 100% 50% / 0.2;
-  --input: 145 100% 50% / 0.2;
-  --ring: 145 100% 50%;
+  --background: 222 14% 6%;
+  --foreground: 176 68% 46%;
 
-  --card: 0 0% 6%;
-  --card-foreground: 145 100% 50%;
-  --card-border: 145 100% 50% / 0.3;
+  --border: 176 68% 46% / 0.2;
+  --input: 176 68% 46% / 0.2;
+  --ring: 176 68% 46%;
 
-  --popover: 0 0% 6%;
-  --popover-foreground: 145 100% 50%;
-  --popover-border: 145 100% 50% / 0.3;
+  --card: 222 14% 8%;
+  --card-foreground: 176 68% 46%;
+  --card-border: 176 68% 46% / 0.25;
 
-  --primary: 145 100% 50%;
-  --primary-foreground: 0 0% 4%;
+  --popover: 222 14% 8%;
+  --popover-foreground: 176 68% 46%;
+  --popover-border: 176 68% 46% / 0.25;
 
-  --secondary: 0 0% 12%;
-  --secondary-foreground: 145 100% 50%;
+  --primary: 176 68% 46%;
+  --primary-foreground: 222 14% 6%;
+  --primary-border: hsl(176 68% 38%);
 
-  --muted: 0 0% 12%;
-  --muted-foreground: 145 100% 50% / 0.6;
+  --secondary: 222 14% 12%;
+  --secondary-foreground: 176 68% 46%;
+  --secondary-border: hsl(222 14% 18%);
 
-  --accent: 145 100% 50% / 0.1;
-  --accent-foreground: 145 100% 50%;
+  --muted: 222 14% 11%;
+  --muted-foreground: 176 40% 55%;
+  --muted-border: hsl(222 14% 18%);
+
+  --accent: 38 90% 57%;
+  --accent-foreground: 222 14% 6%;
+  --accent-border: hsl(38 90% 45%);
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
+  --destructive-border: hsl(0 84% 50%);
 }
 
 @layer base {
@@ -162,9 +177,9 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.18) 50%);
   z-index: 100;
-  background-size: 100% 2px, 3px 100%;
+  background-size: 100% 3px;
   pointer-events: none;
 }
 
@@ -191,4 +206,23 @@
 .marquee-content {
   display: inline-block;
   animation: marquee 20s linear infinite;
+}
+
+/* Midcentury atomic ring spin */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.spin-slow-reverse {
+  animation: spin-slow-reverse 24s linear infinite;
 }
