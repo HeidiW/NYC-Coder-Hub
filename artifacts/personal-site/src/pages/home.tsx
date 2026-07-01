@@ -1,6 +1,135 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, BookOpen, Coffee, MousePointerClick, Heart, Zap } from "lucide-react";
+import { Github, Linkedin, BookOpen, Coffee, MousePointerClick, Heart, Zap, Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
 import profilePhoto from "@assets/profile-photo-C9nmBW5u_1782931675382.jpg";
+import { useState } from "react";
+
+type FormStatus = "idle" | "sending" | "success" | "error";
+
+function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Failed to send message.");
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6" data-testid="contact-form">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="contact-name" className="font-mono text-xs uppercase tracking-widest text-primary/70">
+            NAME
+          </label>
+          <input
+            id="contact-name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            maxLength={100}
+            placeholder="Your name"
+            disabled={status === "sending" || status === "success"}
+            className="bg-transparent border border-primary/40 focus:border-primary outline-none px-4 py-3 font-mono text-sm text-foreground placeholder:text-primary/30 transition-colors disabled:opacity-50"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="contact-email" className="font-mono text-xs uppercase tracking-widest text-primary/70">
+            EMAIL
+          </label>
+          <input
+            id="contact-email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            maxLength={200}
+            placeholder="you@example.com"
+            disabled={status === "sending" || status === "success"}
+            className="bg-transparent border border-primary/40 focus:border-primary outline-none px-4 py-3 font-mono text-sm text-foreground placeholder:text-primary/30 transition-colors disabled:opacity-50"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="contact-message" className="font-mono text-xs uppercase tracking-widest text-primary/70">
+          MESSAGE
+        </label>
+        <textarea
+          id="contact-message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          required
+          maxLength={5000}
+          rows={6}
+          placeholder="What's on your mind?"
+          disabled={status === "sending" || status === "success"}
+          className="bg-transparent border border-primary/40 focus:border-primary outline-none px-4 py-3 font-mono text-sm text-foreground placeholder:text-primary/30 transition-colors resize-none disabled:opacity-50"
+        />
+      </div>
+
+      {status === "success" && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-3 border border-primary bg-primary/10 px-4 py-3 font-mono text-sm"
+          data-testid="contact-success"
+        >
+          <CheckCircle className="w-4 h-4 shrink-0" />
+          <span>MESSAGE_SENT.OK — I'll be in touch soon.</span>
+        </motion.div>
+      )}
+
+      {status === "error" && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-3 border border-destructive bg-destructive/10 px-4 py-3 font-mono text-sm text-destructive"
+          data-testid="contact-error"
+        >
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          <span>ERROR: {errorMsg}</span>
+        </motion.div>
+      )}
+
+      <button
+        type="submit"
+        disabled={status === "sending" || status === "success"}
+        className="self-start flex items-center gap-3 border border-primary px-6 py-3 font-mono text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed group"
+        data-testid="contact-submit"
+      >
+        <Send className="w-4 h-4 group-hover:translate-x-1 group-disabled:translate-x-0 transition-transform" />
+        {status === "sending" ? "TRANSMITTING..." : status === "success" ? "SENT ✓" : "SEND_MESSAGE.EXE"}
+      </button>
+    </form>
+  );
+}
 
 /* ── Midcentury modern atomic starburst ───────────────────────────── */
 function Starburst({ size = 18, className = "" }: { size?: number; className?: string }) {
@@ -295,6 +424,23 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </section>
+
+        {/* ── CONTACT ──────────────────────────────────────────────── */}
+        <section className="flex flex-col gap-6" data-testid="contact-section">
+          <SectionHeader icon={<Mail className="w-5 h-5" />}>CONTACT.EXE</SectionHeader>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-8"
+          >
+            <p className="text-muted-foreground font-light text-lg max-w-lg">
+              Got a project in mind, an opportunity to discuss, or just want to say hello? Send a message and I'll get back to you.
+            </p>
+            <ContactForm />
+          </motion.div>
         </section>
 
         {/* ── FOOTER ───────────────────────────────────────────────── */}
