@@ -1,1 +1,2 @@
 - [Personal site design palette](personal-site-palette.md) — teal primary + amber accent; all palette changes go in index.css :root only.
+- [Vercel deployment setup](vercel-deploy.md) — repo-root as Vercel root; contact form runs as api/contact.ts serverless fn (not Express); needs RESEND_API_KEY + packageManager pin.
